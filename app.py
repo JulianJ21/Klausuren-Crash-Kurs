@@ -1,62 +1,52 @@
-
 import streamlit as st
 import random
 
-st.set_page_config(page_title="📘 Marketing Lern-App", layout="wide")
+# === Klausurfragen aus SS23, SoSe23, SS25 ===
+questions = [
+    # SS23
+    {"klausur": "SS23", "typ": "offen", "frage": "Welche Segmentierungskriterien würden Sie für einen Bio-Lebensmittelanbieter anwenden?", "lösung": "Psychografisch, Verhaltensorientiert, Demografisch"},
+    {"klausur": "SS23", "typ": "offen", "frage": "Welche Preisstrategie würden Sie für ein neues innovatives Produkt wählen?", "lösung": "Skimming-Strategie (Abschöpfung)"},
+    {"klausur": "SS23", "typ": "offen", "frage": "Nennen Sie zwei Maßnahmen im Rahmen eines Relaunchs.", "lösung": "Verpackungsänderung, neue Kommunikation, Produktverbesserung"},
+    {"klausur": "SS23", "typ": "offen", "frage": "Welche Kommunikationsinstrumente sind für ein erklärungsbedürftiges B2B-Produkt geeignet?", "lösung": "Persönlicher Verkauf, PR, Messe"},
 
-modules = [
-    {
-        "title": "1. Grundlagen des Marketings",
-        "core_insight": "Marketing bedeutet konsequente Kundenorientierung.",
-        "content": "Definition, Entwicklungsphasen, strategisches vs. operatives Marketing...",
-        "story": "Marketing ist wie ein Kompass, der alle Unternehmensbereiche auf den Kunden ausrichtet."
-    },
-    {
-        "title": "5. Preiselastizität (⚠️ Klausurfrage)",
-        "core_insight": "Misst die Reaktion der Nachfrage auf Preisänderungen.",
-        "content": "Formel: Preiselastizität = (% Mengenänderung) / (% Preisänderung)",
-        "story": "Wenn du den Preis senkst und der Absatz stark steigt, ist die Nachfrage elastisch – wie ein Gummiband."
-    }
+    # SoSe23
+    {"klausur": "SoSe23", "typ": "offen", "frage": "Nennen Sie drei Ziele der Kommunikationspolitik.", "lösung": "Bekanntheit, Einstellung, Verhalten"},
+    {"klausur": "SoSe23", "typ": "offen", "frage": "Beschreiben Sie das AIDA-Modell anhand eines Beispiels.", "lösung": "Attention → Interest → Desire → Action (z. B. Autowerbung)"},
+    {"klausur": "SoSe23", "typ": "rechnen", "frage": "Berechnen Sie die Preiselastizität bei 10 % Preisänderung & 15 % Absatzänderung.", "lösung": "-1,5"},
+    {"klausur": "SoSe23", "typ": "rechnen", "frage": "Werbekosten: 2.000 €, Reichweite: 50.000. Wie hoch ist der TKP?", "lösung": "40 €"},
+    {"klausur": "SoSe23", "typ": "offen", "frage": "Nennen Sie zwei Verfahren zur Werbeerfolgskontrolle.", "lösung": "Recall-Test, Recognition-Test"},
+    {"klausur": "SoSe23", "typ": "offen", "frage": "Nennen Sie drei Vorteile von Online-Marketing.", "lösung": "Zielgruppenfokus, Interaktivität, Messbarkeit"},
+
+    # SS25
+    {"klausur": "SS25", "typ": "offen", "frage": "Beschreibe den Begriff 'Elaboration' und skizziere das Elaboration Likelihood Modell.", "lösung": "Verarbeitungstiefe: zentrale & periphere Route"},
+    {"klausur": "SS25", "typ": "offen", "frage": "Was ist ein Buying Center? Nenne drei zentrale Rollen.", "lösung": "Initiator, Entscheider, Gatekeeper"},
+    {"klausur": "SS25", "typ": "offen", "frage": "Beschreibe die Schritte der Strategieentwicklung im Marketing anhand eines Beispiels.", "lösung": "Analyse – Alternativen – Bewertung – Auswahl – Umsetzung"},
+    {"klausur": "SS25", "typ": "offen", "frage": "Trage die vier zentralen Arten digitaler Plattformen in ein Koordinatensystem ein und benenne die Achsen.", "lösung": "Forum Maker, Matchmaker, Enabler, Hub"},
+    {"klausur": "SS25", "typ": "rechnen", "frage": "Berechne die Preiselastizität bei p = 20 € für x(p) = 1000 - 40p.", "lösung": "-4"},
+    {"klausur": "SS25", "typ": "rechnen", "frage": "Berechne den gewinnmaximalen Preis für x(p) = 260.000 - 200.000p, K(x) = 520.000 + 0,25x.", "lösung": "p = 0,78 €"},
+    {"klausur": "SS25", "typ": "offen", "frage": "Was ist die Nettoreichweite? Und worin liegt der Unterschied zur Bruttoreichweite?", "lösung": "Brutto = Kontakte, Netto = Personen"},
+    {"klausur": "SS25", "typ": "rechnen", "frage": "Berechne die Bruttoreichweite anhand gegebener Mediadaten.", "lösung": "45,6 Mio Kontakte"},
+    {"klausur": "SS25", "typ": "offen", "frage": "Nenne zwei Kriterien zur Vertriebswegeentscheidung und zwei proaktive Kriterien für Key Account Auswahl.", "lösung": "Produkt-/Abnehmerbezogen, Potenzial, Know-how"},
+    {"klausur": "SS25", "typ": "offen", "frage": "Welche Datenquellen/Methoden nutzt man für Zufriedenheit und Layout-Tests? Wie ist die Schätzfunktion zu beurteilen?", "lösung": "Online-Befragung, A/B-Test, geringe Regressionsgüte"}
 ]
 
-flashcards = [
-    {"question": "Was ist der Unterschied zwischen strategischem und operativem Marketing?", "answer": "Strategisch: langfristig, zukunftsorientiert. Operativ: kurzfristig, Maßnahmenebene."},
-    {"question": "⚠️ Klausurfrage: Formel für Preiselastizität?", "answer": "Preiselastizität = (% Mengenänderung) / (% Preisänderung)"},
-    {"question": "Nenne die 4 P’s des Marketing-Mix.", "answer": "Product, Price, Place, Promotion"},
-    {"question": "⚠️ Klausurfrage: Was ist der Tausenderkontaktpreis (TKP)?", "answer": "TKP = (Kosten / Bruttoreichweite) × 1000"}
-]
+# === Streamlit UI ===
+st.header("📘 Klausur-Quiz: SS23, SoSe23, SS25")
 
-st.title("📘 Marketing Lern-App")
-tab1, tab2, tab3 = st.tabs(["📚 Lernmodule", "🃏 Quizkarten", "💬 Studienpartner"])
+klausurwahl = st.selectbox("Wähle einen Klausurjahrgang", ["Alle", "SS23", "SoSe23", "SS25"])
+typwahl = st.selectbox("Fragetyp", ["Alle", "offen", "rechnen"])
 
-with tab1:
-    for i, m in enumerate(modules):
-        with st.expander(f"{m['title']}"):
-            st.markdown(f"**Kernaussage:** {m['core_insight']}")
-            st.markdown("**Inhalt:**")
-            st.info(m["content"])
-            if st.checkbox("Story anzeigen", key=f"story_{i}"):
-                st.success(m["story"])
+# Filterung
+gefiltert = [q for q in questions if 
+             (klausurwahl == "Alle" or q["klausur"] == klausurwahl) and 
+             (typwahl == "Alle" or q["typ"] == typwahl)]
 
-with tab2:
-    for i, card in enumerate(flashcards):
-        st.markdown(f"**Frage {i+1}:** {card['question']}")
-        if st.button(f"Antwort zeigen ({i+1})", key=f"btn_{i}"):
-            st.success(card["answer"])
-        st.markdown("---")
-
-with tab3:
-    if "q" not in st.session_state:
-        st.session_state.q = random.choice(flashcards)
-        st.session_state.waiting = True
-
-    if st.session_state.waiting:
-        st.markdown(f"**Frage:** {st.session_state.q['question']}")
-        answer = st.text_input("Deine Antwort:", key="user_input")
-        if st.button("Antwort prüfen"):
-            st.success(st.session_state.q["answer"])
-            st.session_state.waiting = False
-    else:
-        if st.button("Nächste Frage"):
-            st.session_state.q = random.choice(flashcards)
-            st.session_state.waiting = True
+# Zufällige Frage ziehen
+if gefiltert:
+    frage = random.choice(gefiltert)
+    st.subheader(f"📝 Frage ({frage['typ']}, {frage['klausur']}):")
+    st.write(frage["frage"])
+    if st.button("Antwort anzeigen"):
+        st.success(frage["lösung"])
+else:
+    st.warning("Keine passenden Fragen gefunden.")
