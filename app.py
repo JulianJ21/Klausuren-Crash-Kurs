@@ -659,3 +659,34 @@ elif section == "📊 Progress Tracker":
         st.success("Progress has been reset.")
 
 # --- END OF FILE ---
+    # --- BONUS: Vertiefung für 1.0 ---
+    if chapter == "Vertiefung für 1.0":
+        st.subheader("📈 Vertiefung für 1.0")
+
+        flashcard("Stelle die PAF x(p) = 100 - 2p nach p um.", 
+                  "p(x) = (100 - x) / 2", "v1")
+
+        quiz_open("Wie verändert sich die Nachfrage bei +10% Preisänderung (PAF: x(p) = 100 - 2p)?", 
+                  "Nachfrage sinkt z. B. von 60 auf 56 bei Preisanstieg von 20 € auf 22 €", "v2")
+
+        flashcard("Erkläre das AIDA-Modell.", 
+                  "A = Attention\nI = Interest\nD = Desire\nA = Action\n→ Klassisches Modell zur Werbewirkung", "v3")
+
+        quiz_open("Nenne ein reales Beispiel für AIDA (z. B. Apple-Werbung).", 
+                  "iPhone: Aufmerksamkeit durch Bild, Interesse durch Headline, Wunsch durch Features, Aktion durch Call-to-Action", "v4")
+
+        flashcard("Gruppe A: Ø=4,5 | Var=0,2 — Gruppe B: Ø=4,2 | Var=0,05. Welche Kampagne ist besser?", 
+                  "A = höhere Wirkung, B = stabilere Wirkung → hängt vom Ziel ab", "v5")
+
+        flashcard("Unterscheide vollkommener Markt vs. Monopol (grafisch & strategisch).", 
+                  "- Vollkommener Markt: horizontale Nachfrage, kein Preisspielraum\n- Monopol: fallende Nachfrage, Preisgestaltung möglich", "v6")
+
+        quiz_open("Bewerte die Strategie 'Restaurant-Kooperation' bei plants4meat.", 
+                  "Indirekter Vertrieb, Imagetransfer, glaubwürdige Platzierung, aber Kontrollverlust möglich", "v7")
+
+        show_progress()
+chapter = st.selectbox("Choose Chapter", [
+    ...
+    "24. Ansoff Matrix & Wettbewerbsstrategien",
+    "Vertiefung für 1.0"  # <-- hier einfügen
+])
