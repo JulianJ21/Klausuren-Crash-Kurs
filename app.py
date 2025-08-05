@@ -685,8 +685,3 @@ elif section == "📊 Progress Tracker":
                   "Indirekter Vertrieb, Imagetransfer, glaubwürdige Platzierung, aber Kontrollverlust möglich", "v7")
 
         show_progress()
-chapter = st.selectbox("Choose Chapter", [
-    ...
-    "24. Ansoff Matrix & Wettbewerbsstrategien",
-    "Vertiefung für 1.0"  # <-- hier einfügen
-])
